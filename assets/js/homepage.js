@@ -5,6 +5,7 @@ var weatherSearchTerm = document.querySelector("#weather-search-term");
 var destinationInputEl = document.querySelector("#destination");
 var weatherCardEl= document.getElementById("forecast-cards");
 var searchHistoryListEl = document.getElementById("search-history-list");
+var forecastCardsEl= document.getElementById("forecast-cards");
 var cityList = [];
 var currentTime = moment().format("MM/D/YYYY");
 
@@ -21,6 +22,9 @@ var formSubmitHandler = function(event) {
     return;
   };
 
+
+
+  
   // save the user input in local storage 
     saveSearchTerm(city);
 
@@ -42,6 +46,7 @@ var getUserCity = function(city, state) {
 .catch(function(error) {
   alert("unable to connect to Weather App");
 });
+getUserInput(city,state);
 };
 
 var displayCurrentWeather =function (weatherData) {
@@ -65,6 +70,57 @@ weatherCardEl.appendChild(div)
 
  };
 
+ //get forecast
+ var getUserInput = function(city, state) {
+  fetch("https://api.openweathermap.org/data/2.5/forecast/?q=" + city + "," + state + "&cnt=5&units=imperial&appid=6a22242f54371d060e263ed6f93748a9")
+  .then(function(response) {
+    if (response.ok) {
+      response.json().then(function(data) {
+      displayCurrentForecast(data)
+      });
+    } 
+  })
+  
+  };
+
+
+ //display forecast
+
+ var displayCurrentForecast =function (weatherData) {
+  forecastCardsEl.innerHTML = ''
+  
+    for (var i= 0;  i < weatherData.list.length; i+=8 ) {
+  
+      date =[moment().add(1,'days').format('L'),moment().add(2,'days').format('L'),moment().add(3,'days').format('L'),moment().add(4,'days').format('L'),moment().add(5,'days').format('L')]
+  
+      for(vari=0; i<date.length; i++){
+  
+  
+        var forecastiIconUrl = "https://openweathermap.org/img/w/" + weatherData.list[i].weather[0].icon + ".png";
+  
+        var div = document.createElement("div")
+        div.classList.add("column")
+  
+                      
+        var innerHtml = 
+       '<div class="card">' + 
+          '<div class="card-body bg-info text-light">' +
+              '<center>' +
+              '<h5">'+ date[i] +'</h5>' +
+              '<p><img src="' + forecastiIconUrl + '"></p>' + 
+              '<p><b>High:</b> '+weatherData.list[i].main.temp_max+' °F</p>' +
+              '<p><b>Low:</b> '+weatherData.list[i].main.temp_min+' °F</p>' +
+             '<p><b>Humidity:</b> '+weatherData.list[i].main.humidity+'%</p>' +
+             '<p><b>Wind Speed:</b> '+weatherData.list[i].wind.speed+' MPH</p>' +
+            '</div>' +
+        '</div>'
+  
+        div.innerHTML = innerHtml
+       forecastCardsEl.appendChild(div)
+      }; 
+    };
+  };
+
  var saveSearchTerm = function (cityInput) {
 
 
@@ -76,6 +132,11 @@ weatherCardEl.appendChild(div)
     localStorage.setItem("cityList",JSON.stringify(cityList))
 
 };
+
+
+
+
+
 
 
 var loadSearchHistory = function () {
@@ -111,17 +172,8 @@ var searchHistoryHandler = function (event) {
 
 
 
-
-// on page load I want search history to be displayed, so call it at bottom of page 
-
 loadSearchHistory();
 
-
-    
-
-searchHistoryListEl.addEventListener("click", searchHistoryHandler);
-
-    
-
  //event listeners
+searchHistoryListEl.addEventListener("click", searchHistoryHandler);
 userFormEl.addEventListener("submit", formSubmitHandler);
