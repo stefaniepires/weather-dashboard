@@ -6,6 +6,7 @@ var destinationInputEl = document.querySelector("#destination");
 var weatherCardEl= document.getElementById("forecast-cards");
 var searchHistoryListEl = document.getElementById("search-history-list");
 var cityList = [];
+var currentTime = moment().format("MM/D/YYYY");
 
 //to be executed upon a form submission browser event 
 var formSubmitHandler = function(event) {
@@ -49,13 +50,12 @@ var iconUrl = "https://openweathermap.org/img/w/" + weatherData.weather[0].icon 
 var div = document.createElement("div")
 
 var innerHtml = 
-'<div class="card">' +
-'<div class="card-body">' +
+'<div>' +
+'<h5>' + currentTime + '</h5>' +
 '<h3>' +weatherData.name +'</h3>' + '<img src="' + iconUrl + '">' +
 '<p><b>Temperature</b> '+weatherData.main.temp+' °F</p>' +
 '<p><b>Humidity:</b> '+weatherData.main.humidity+'%</p>' +
 '<p><b>Wind Speed:</b> '+weatherData.wind.speed+' MPH</p>' +
-'</div>' + 
 '</div>'
 
 div.innerHTML = innerHtml
