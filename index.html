@@ -20,8 +20,6 @@
     <title>Weather Dashboard</title>
   </head>
   <body>
-  <main>
-  <div class="row">
     <header class="col-12 bg-dark text-light sticky-top d-flex flex-column p-4 p-lg-3">
       <h1 class="text-center" id="weather-header"> <span class="fas fa-cloud-sun-rain"></span>
         Weather Dashboard</h1>
@@ -29,23 +27,41 @@
 <div class="container bg-light">
   <div class="row">
     <div class="col-lg-4 col-md-4">
-            <h3>Search for a City:</h3>
-            <div id="cityInput" class="input-group md-form form-sm form-1 pl-0">
-              <input id="input" class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search">
-              <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-text1"><i class="fas fa-search"
-                                                                         aria-hidden="true"></i></span>
-              </div>
-            </div>
+      <h3>Search for a City:</h3>
+        <div id="cityInput" class="input-group md-form form-sm form-1 pl-0">
+          <form id="user-form">
+            <input id = "destination" class="input" type="text" placeholder="Enter Location">
+            <button type="submit" class= "bg-info"> <span class="fas fa-search"></span>    </button>
+          </form>
+        </div>
+      <div id ="search-history-list">
+        <ul class="list-group">
+
+        </ul>
         
+      </div>
+
     </div>
-    <div class="col-lg-8 col-md-8">
-      One of three columns
-    </div>
+  <div class="col-lg-8 col-md-8">
+    <div class="media">
+      <div class="media-content">
+          <p class="title is-4">
+          <div id="weather-card"></div>
+
+      </div>
+  </div>
+  <div class="col-lg-8 col-md-8">
+    <div class="card-deck" id="forecast-cards"></div>
+</div>
+</div>
+  
+</div>
   
 
     </main>
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/homepage.js"></script>
   </body>
 </html>
