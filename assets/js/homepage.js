@@ -149,7 +149,7 @@ for (var i= 0; i < cityList.length; i++){
 
     li.classList.add("list-group-item")
 
-    li.innerHTML = '<button type="button" class="list-group-item list-group-item-action search-history-btn"'+ cityList[i]+'">'+ cityList[i] + '</button>'
+    li.innerHTML = '<button class="list-group-item list-group-item-action search-history-btn" value="'+ cityList[i]+'">'+ cityList[i] + '</button>'
 
     searchHistoryListEl.appendChild(li);
 
@@ -158,14 +158,12 @@ for (var i= 0; i < cityList.length; i++){
 };
 
 
-
-// when a button is clicked I used event delegation to call getCurrentWeatherData value of the button that was clicked using event.target.value
 var searchHistoryHandler = function (event) {
 
   var button = (event.target);
   if (button.classList.contains("search-history-btn")) {
 
-    getCurrentWeatherData(button.value);
+    getUserCity(button.value);
 
   }  
 };
