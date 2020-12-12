@@ -168,7 +168,7 @@ var searchHistoryHandler = function (event) {
   }  
 };
 
-
+//fixed bug 
 
 loadSearchHistory();
 
