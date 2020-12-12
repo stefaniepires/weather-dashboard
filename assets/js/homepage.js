@@ -49,11 +49,14 @@ getUserInput(city,state);
 };
 
 var displayCurrentWeather =function (weatherData) {
+//clear out any old content
+weatherCardEl.textContent = "";
 
 var iconUrl = "https://openweathermap.org/img/w/" + weatherData.weather[0].icon + ".png";
 
 var div = document.createElement("div")
 var innerHtml = 
+'<h3 class="text-dark text-center">Daily Weather: </h3> <hr>' + 
 '<h5>' + weatherData.name + ' ' + '(' + currentTime+ ')' +'<img src="'+ iconUrl + '">' + '</h5>' +
 '<p><b>Temperature</b> '+Math.round(weatherData.main.temp)+' °F</p>' +
 '<p><b>Humidity:</b> '+weatherData.main.humidity+'%</p>' +
@@ -121,6 +124,7 @@ weatherCardEl.appendChild(div)
     };
   };
 
+
  var saveSearchTerm = function (cityInput) {
 
 
@@ -168,7 +172,7 @@ var searchHistoryHandler = function (event) {
   }  
 };
 
-//fixed bug 
+
 
 loadSearchHistory();
 
