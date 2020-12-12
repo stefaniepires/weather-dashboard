@@ -45,6 +45,8 @@ var getUserCity = function(city, state) {
 };
 
 var displayCurrentWeather =function (weatherData) {
+//clear out any old content
+  weatherCardEl.textContent = "";
 var iconUrl = "https://openweathermap.org/img/w/" + weatherData.weather[0].icon + ".png";
 
 var div = document.createElement("div")
