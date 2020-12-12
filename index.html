@@ -24,40 +24,40 @@
       <h1 class="text-center" id="weather-header"> <span class="fas fa-cloud-sun-rain"></span>
         Weather Dashboard</h1>
 </header>
-<div class="container bg-light">
-  <div class="row">
-    <div class="col-lg-4 col-md-4">
-      <h3>Search for a City:</h3>
-        <div id="cityInput" class="input-group md-form form-sm form-1 pl-0">
-          <form id="user-form">
-            <input id = "destination" class="input" type="text" placeholder="Enter Location">
-            <button type="submit" class= "bg-info"> <span class="fas fa-search"></span>    </button>
-          </form>
-        </div>
-      <div id ="search-history-list">
-        <ul class="list-group">
-
-        </ul>
-        
-      </div>
-
+<div class="container">
+<div class="row container bg-light">
+  <div class="col-lg-4 col-md-4">
+    <h3 class="text-dark text-center">Search for a City:</h3>
+    <div id="cityInput" class="input-group mb-3">
+      <div class="input-group-prepend"></div>
+      <input type="text" class="form-control" id = "destination" placeholder="Enter Location" aria-label="Example text with button addon" aria-describedby="button-addon1">
+      <button type="submit" class= "btn btn-info" id="userInput"> <span class="fas fa-search"></span>    </button>
     </div>
-  <div class="col-lg-8 col-md-8">
-    <div class="media">
-      <div class="media-content">
-          <p class="title is-4">
-          <div id="weather-card"></div>
-
-      </div>
+    <div id ="search-history-list">
+      <ul class="list-group"></ul>
+    </div>
   </div>
-  <div class="col-lg-8 col-md-8">
-    <div class="card-deck" id="forecast-cards"></div>
+  <div class="col-lg-8 col-md-8 remove-all-margin">
+    <div class="col-12">
+      <div class="media-content">
+        <p class= "title is-4"></p>
+        <div id="weather-card">
+          <h3 class="text-dark text-center">Daily Weather: </h3> <hr>
+        </div>
+        <div class="row">
+        <div class="col-12" id="forecast">
+          <h3 class="text-dark text-center">5-Day Forecast: </h3><hr>
+          
+        <div class="card-deck" id="forecast-cards"></div>
+      </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+ 
+     
 </div>
-</div>
-  
-</div>
-  
-
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>

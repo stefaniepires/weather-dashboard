@@ -1,13 +1,13 @@
 //var for the form: <form> and <input> elements
-var userFormEl = document.querySelector("#user-form");
+var userFormEl = document.querySelector("#userInput");
 var weatherContainerEl = document.querySelector("#weather-container");
 var weatherSearchTerm = document.querySelector("#weather-search-term");
 var destinationInputEl = document.querySelector("#destination");
-var weatherCardEl= document.getElementById("forecast-cards");
+var weatherCardEl= document.getElementById("weather-card");
 var searchHistoryListEl = document.getElementById("search-history-list");
 var forecastCardsEl= document.getElementById("forecast-cards");
 var cityList = [];
-var currentTime = moment().format("MM/D/YYYY");
+var currentTime = moment().format("MMM D, YYYY");
 
 //to be executed upon a form submission browser event 
 var formSubmitHandler = function(event) {
@@ -36,8 +36,7 @@ var getUserCity = function(city, state) {
   .then(function(response) {
     if (response.ok) {
       response.json().then(function(data) {
-      displayCurrentWeather(data)
-       console.log(data);
+        displayCurrentWeather(data);
       });
     } else {
       alert("Error!");
@@ -50,20 +49,15 @@ getUserInput(city,state);
 };
 
 var displayCurrentWeather =function (weatherData) {
-//clear out any old content
-  weatherCardEl.textContent = "";
+
 var iconUrl = "https://openweathermap.org/img/w/" + weatherData.weather[0].icon + ".png";
 
 var div = document.createElement("div")
-
 var innerHtml = 
-'<div>' +
-'<h5>' + currentTime + '</h5>' +
-'<h3>' +weatherData.name +'</h3>' + '<img src="' + iconUrl + '">' +
-'<p><b>Temperature</b> '+weatherData.main.temp+' °F</p>' +
+'<h5>' + weatherData.name + ' ' + '(' + currentTime+ ')' +'<img src="'+ iconUrl + '">' + '</h5>' +
+'<p><b>Temperature</b> '+Math.round(weatherData.main.temp)+' °F</p>' +
 '<p><b>Humidity:</b> '+weatherData.main.humidity+'%</p>' +
-'<p><b>Wind Speed:</b> '+weatherData.wind.speed+' MPH</p>' +
-'</div>'
+'<p><b>Wind Speed:</b> '+Math.round(weatherData.wind.speed)+' MPH</p>' 
 
 div.innerHTML = innerHtml
 weatherCardEl.appendChild(div)
@@ -76,12 +70,17 @@ weatherCardEl.appendChild(div)
   .then(function(response) {
     if (response.ok) {
       response.json().then(function(data) {
-      displayCurrentForecast(data)
+        displayCurrentForecast(data);
       });
-    } 
-  })
-  
-  };
+    } else {
+      alert("Error!");
+    }
+})
+.catch(function(error) {
+  alert("unable to connect to Weather App");
+});
+
+};
 
 
  //display forecast
@@ -89,7 +88,7 @@ weatherCardEl.appendChild(div)
  var displayCurrentForecast =function (weatherData) {
   forecastCardsEl.innerHTML = ''
   
-    for (var i= 0;  i < weatherData.list.length; i+=8 ) {
+    for (var i= 0;  i < weatherData.list.length; i+=10 ) {
   
       date =[moment().add(1,'days').format('L'),moment().add(2,'days').format('L'),moment().add(3,'days').format('L'),moment().add(4,'days').format('L'),moment().add(5,'days').format('L')]
   
@@ -97,21 +96,22 @@ weatherCardEl.appendChild(div)
   
   
         var forecastiIconUrl = "https://openweathermap.org/img/w/" + weatherData.list[i].weather[0].icon + ".png";
+
   
         var div = document.createElement("div")
         div.classList.add("column")
   
                       
         var innerHtml = 
+
        '<div class="card">' + 
-          '<div class="card-body bg-info text-light">' +
-              '<center>' +
-              '<h5">'+ date[i] +'</h5>' +
+          '<div class="card-body bg-info text-light text-center border rounded-lg">' +
+              '<h5><b>' + date[i] +'</b></h5>' +
               '<p><img src="' + forecastiIconUrl + '"></p>' + 
-              '<p><b>High:</b> '+weatherData.list[i].main.temp_max+' °F</p>' +
-              '<p><b>Low:</b> '+weatherData.list[i].main.temp_min+' °F</p>' +
+              '<p><b>Temperature:</b> '+Math.round(Math.ceil(weatherData.list[i].main.temp_max))+' °F</p>' +
+              '<p><b>Low:</b> '+Math.round(Math.floor(weatherData.list[i].main.temp_min))+' °F</p>' +
              '<p><b>Humidity:</b> '+weatherData.list[i].main.humidity+'%</p>' +
-             '<p><b>Wind Speed:</b> '+weatherData.list[i].wind.speed+' MPH</p>' +
+             '<p><b>Wind Speed:</b> '+Math.round(weatherData.list[i].wind.speed)+' MPH</p>' +
             '</div>' +
         '</div>'
   
@@ -149,7 +149,7 @@ for (var i= 0; i < cityList.length; i++){
 
     li.classList.add("list-group-item")
 
-    li.innerHTML = '<button type="button" class="list-group-item list-group-item-action"'+ cityList[i]+'">'+ cityList[i] + '</button>'
+    li.innerHTML = '<button type="button" class="list-group-item list-group-item-action search-history-btn"'+ cityList[i]+'">'+ cityList[i] + '</button>'
 
     searchHistoryListEl.appendChild(li);
 
@@ -176,4 +176,4 @@ loadSearchHistory();
 
  //event listeners
 searchHistoryListEl.addEventListener("click", searchHistoryHandler);
-userFormEl.addEventListener("submit", formSubmitHandler);
+userFormEl.addEventListener("click", formSubmitHandler);

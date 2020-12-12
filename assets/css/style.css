@@ -1,6 +1,31 @@
 
   @import url('https://fonts.googleapis.com/css2?family=Lora&family=Montserrat&display=swap');
 
+  header {
+    background: rgb(102,106,108);
+background: linear-gradient(0deg, rgba(102,106,108,1) 0%, rgba(41,43,44,1) 100%);
+  }
   #weather-header {
     font-family: 'Montserrat', sans-serif;
+  }
+
+
+
+  .card-body {
+    filter: drop-shadow(15px 15px 10px var(#242121));
+    opacity: 0.9;
+    background: rgb(29,120,147);
+background: linear-gradient(0deg, rgba(29,120,147,1) 0%, rgba(91,192,222,1) 100%);
+  }
+
+  .btn {
+    background: rgb(29,120,147);
+background: linear-gradient(0deg, rgba(29,120,147,1) 0%, rgba(91,192,222,1) 100%);
+transition: all .1s ease-out;
+  }
+
+  .btn:hover {
+    background: rgb(29,120,147);
+background: linear-gradient(0deg, rgba(91,192,222,1) 0%, rgba(29,120,147,1) 100%);
+transition: all .1s ease-out;
   }
