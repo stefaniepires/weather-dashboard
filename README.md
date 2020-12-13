@@ -13,3 +13,5 @@ Dashboard that runs in the browser and dynamically updates HTML and CSS. Used th
 ## Website 
 https://steftinsley.github.io/weather-dashboard/
 
+![Screenshot](https://github.com/steftinsley/weather-dashboard/blob/main/assets/images/project1.png)
+
