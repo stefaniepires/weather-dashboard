@@ -15,3 +15,5 @@ https://steftinsley.github.io/weather-dashboard/
 
 ![Screenshot](https://github.com/steftinsley/weather-dashboard/blob/main/assets/images/project1.png)
 
+
+![Screenshot](https://github.com/steftinsley/weather-dashboard/blob/main/assets/images/screenshot1_weather.png)
