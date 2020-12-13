@@ -6,6 +6,7 @@ var destinationInputEl = document.querySelector("#destination");
 var weatherCardEl= document.getElementById("weather-card");
 var searchHistoryListEl = document.getElementById("search-history-list");
 var forecastCardsEl= document.getElementById("forecast-cards");
+var cityUvIndex = document.getElementById("uv-index");
 var cityList = [];
 var currentTime = moment().format("MMM D, YYYY");
 
@@ -58,7 +59,7 @@ var div = document.createElement("div")
 var innerHtml = 
 '<h3 class="text-dark text-center">Daily Weather: </h3> <hr>' + 
 '<h5>' + weatherData.name + ' ' + '(' + currentTime+ ')' +'<img src="'+ iconUrl + '">' + '</h5>' +
-'<p><b>Temperature</b> '+Math.round(weatherData.main.temp)+' °F</p>' +
+'<p><b>Temperature:</b> '+Math.round(weatherData.main.temp)+' °F</p>' +
 '<p><b>Humidity:</b> '+weatherData.main.humidity+'%</p>' +
 '<p><b>Wind Speed:</b> '+Math.round(weatherData.wind.speed)+' MPH</p>' 
 
@@ -74,6 +75,7 @@ weatherCardEl.appendChild(div)
     if (response.ok) {
       response.json().then(function(data) {
         displayCurrentForecast(data);
+        getUvData(data);
       });
     } else {
       alert("Error!");
@@ -123,6 +125,48 @@ weatherCardEl.appendChild(div)
       }; 
     };
   };
+
+//UV
+
+var getUvData = function (coordinates) {
+console.log(coordinates);
+var lat = coordinates.city.coord.lat
+console.log(lat);
+var lon = coordinates.city.coord.lon
+console.log(lon);
+   
+fetch("https://api.openweathermap.org/data/2.5/uvi?lat="+ lat +"&lon="+ lon +"&appid=6a22242f54371d060e263ed6f93748a9")
+
+.then(function(response) {
+  if (response.ok){
+    response.json().then(function(data) {
+
+      displayUvData(data);
+      
+    });
+  } else {
+    alert("Error: " + response.statusText);
+    }
+    })
+  .catch(function(error) {
+  // if internet is down? error type???
+  alert("unable to connect to Weather App");
+});
+
+};
+
+var displayUvData = function (uvdata) {
+cityUvIndex.innerHTML = 
+
+cityUvIndex.textContent = "";
+
+var div = document.createElement("div")
+var innerHtml = 
+'<p><b>&nbsp;&nbsp;&nbsp;&nbsp;UV Index:</b>' + ' ' + uvdata.value 
+
+div.innerHTML = innerHtml
+cityUvIndex.appendChild(div)
+ };
 
 
  var saveSearchTerm = function (cityInput) {
