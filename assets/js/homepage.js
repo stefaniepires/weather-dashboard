@@ -138,11 +138,6 @@ weatherCardEl.appendChild(div)
 };
 
 
-
-
-
-
-
 var loadSearchHistory = function () {
 cityList = JSON.parse(localStorage.getItem("cityList")) || [];
 searchHistoryListEl.innerHTML = ""
