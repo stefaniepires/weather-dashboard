@@ -11,7 +11,7 @@ Dashboard that runs in the browser and dynamically updates HTML and CSS. Used th
 * OpenWeather API 
 
 ## Website 
-https://steftinsley.github.io/weather-dashboard/
+https://stefaniepires.github.io/weather-dashboard/
 
 ![Screenshot](https://github.com/stefaniepires/weather-dashboard/blob/main/assets/images/project1.png)
 
